@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DIY Kits Assistant - Your floral arrangement helper">
+    <title>DIY Kits Assistant</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- ChatKit SDK from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@openai/chatkit@latest/dist/chatkit.umd.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <span class="flower-icon">🌸</span>
+                    DIY Kits Assistant
+                </h1>
+                <p class="subtitle">Ask me anything about our floral arrangement kits!</p>
+            </div>
+            <button id="clearBtn" class="clear-btn" title="Clear conversation">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Chat Container -->
+        <div class="chat-container" id="chatContainer">
+            <div class="welcome-message">
+                <div class="welcome-icon">🌺</div>
+                <h2>Welcome to DIY Kits Assistant!</h2>
+                <p>I'm here to help you explore our beautiful floral arrangement kits. Ask me about product details, what's included, or anything else you'd like to know!</p>
+            </div>
+        </div>
+
+        <!-- Example Questions -->
+        <div class="example-questions" id="exampleQuestions">
+            <button class="example-btn" data-question="What's in Pretty in Pink medium combo?">
+                What's in Pretty in Pink medium combo?
+            </button>
+            <button class="example-btn" data-question="Show all products">
+                Show all products
+            </button>
+            <button class="example-btn" data-question="How many stems in Maple & Merlot large?">
+                How many stems in Maple & Merlot large?
+            </button>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-container">
+            <div class="input-wrapper">
+                <textarea 
+                    id="userInput" 
+                    class="user-input" 
+                    placeholder="Type your message here..."
+                    rows="1"
+                ></textarea>
+                <button id="sendBtn" class="send-btn" title="Send message">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+            <div class="input-hint">Press Enter to send, Shift+Enter for new line</div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div class="loading" id="loading">
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage">
+            <span class="error-icon">⚠️</span>
+            <span class="error-text"></span>
+            <button class="error-close">&times;</button>
+        </div>
+    </div>
+
+    <!-- App Script -->
+    <script src="app.js"></script>
+</body>
+</html>
+
