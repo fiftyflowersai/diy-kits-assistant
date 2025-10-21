@@ -9,54 +9,11 @@
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
     
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <!-- ChatKit Script - Required for ChatKit React -->
+    <script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js" async></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <h1 class="title">
-                    <span class="flower-icon">🌸</span>
-                    DIY Kits Assistant
-                </h1>
-                <p class="subtitle">Ask me anything about our floral arrangement kits!</p>
-            </div>
-            <button id="clearBtn" class="clear-btn" title="Clear conversation">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="3 6 5 6 21 6"></polyline>
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                </svg>
-            </button>
-        </header>
-
-        <!-- Chat Container - OpenAI Agent Embed -->
-        <div class="chat-container" id="chatContainer">
-            <iframe
-                id="chatkit-iframe"
-                src="https://agent.openai.com/embed?workflowId=wf_68f6ab81d6f88190a1dec39a2e92d45e0f1a0f65064df00b&version=1&publicKey=domain_pk_68f6df7bf2888190bf6a77c5e40ae8bd090668efb04679ad"
-                style="width: 100%; height: 100%; border: none;"
-                allow="clipboard-write"
-            ></iframe>
-        </div>
-
-        <!-- Example Questions -->
-        <div class="example-questions" id="exampleQuestions">
-            <button class="example-btn" data-question="What's in Pretty in Pink medium combo?">
-                What's in Pretty in Pink medium combo?
-            </button>
-            <button class="example-btn" data-question="Show all products">
-                Show all products
-            </button>
-            <button class="example-btn" data-question="How many stems in Maple & Merlot large?">
-                How many stems in Maple & Merlot large?
-            </button>
-        </div>
-    </div>
-
-    <!-- App Script -->
-    <script src="app.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
-

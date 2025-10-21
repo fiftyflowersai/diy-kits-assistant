@@ -1,158 +1,235 @@
-# 🌸 DIY Kits Assistant
+# 🌸 DIY Kits Assistant - ChatKit Version
 
-A beautiful, responsive web application that connects to OpenAI Agent Builder workflow using ChatKit to help customers explore floral arrangement kits.
-
-**🔒 Secure Authentication**: Uses OpenAI's official Agent Embed with domain whitelist - no API keys in the code!
-
-## 🚀 Quick Start
-
-### 1. Deploy to GitHub Pages
-
-#### Option A: Via GitHub Web Interface
-1. Push these files to your GitHub repository:
-   ```bash
-   git add .
-   git commit -m "Add DIY Kits Assistant"
-   git push origin main
-   ```
-2. Go to your repository on GitHub
-3. Click **Settings** → **Pages** (in the left sidebar)
-4. Under "Source", select your branch (usually `main`)
-5. Click **Save**
-6. Note your GitHub Pages URL: `https://[username].github.io/[repo-name]/`
-
-#### Option B: Quick Command Line
-```bash
-git add .
-git commit -m "Deploy DIY Kits Assistant"
-git push origin main
-# Then enable Pages in repository Settings → Pages
-```
-
-### 2. Whitelist Your Domain in OpenAI
-
-**This is required for the app to work!**
-
-1. Go to [OpenAI Agent Builder](https://platform.openai.com/agent-builder)
-2. Select your workflow: `wf_68f6ab81d6f88190a1dec39a2e92d45e0f1a0f65064df00b`
-3. Navigate to **Settings** or **Configuration**
-4. Find the **Allowed Domains** or **Domain Whitelist** section
-5. Add your GitHub Pages domain:
-   - Format: `[username].github.io` (without https://)
-   - Example: `baylorharrison.github.io`
-6. **Save** the changes
-
-### 3. Test Your App
-
-1. Visit your GitHub Pages URL
-2. Try the example questions or type your own
-3. The chat should connect to your OpenAI workflow
-
-**For Local Testing**: Add `localhost` to your OpenAI allowed domains list, then open `index.html` in your browser.
+A beautiful floral arrangement assistant powered by OpenAI's ChatKit, deployed on Vercel with serverless backend.
 
 ## ✨ Features
 
-- **Beautiful UI**: Floral-themed design with soft pink and green colors
-- **Responsive**: Works perfectly on mobile, tablet, and desktop
-- **OpenAI Agent Embed**: Official iframe integration with OpenAI Agent Builder
-- **Example Questions**: Quick-start buttons for common queries
-- **Conversation Management**: Clear conversation history with one click
-- **Built-in Chat Interface**: OpenAI's native chat UI embedded
-- **No External Dependencies**: Direct connection to OpenAI (no CDN issues)
-- **Production Ready**: Official embed method, fully supported
+- 🤖 **OpenAI ChatKit Integration** - Advanced conversational AI for floral arrangement assistance
+- 🎨 **Beautiful UI** - Custom floral-themed design with gradient backgrounds
+- ⚡ **Serverless Backend** - Vercel serverless functions for session management
+- 🔐 **Secure** - API keys stored in environment variables, never exposed to frontend
+- 📱 **Responsive** - Works perfectly on desktop, tablet, and mobile
+- 🌺 **Custom Theme** - Floral color palette integrated with ChatKit
 
-## 📋 Files
+## 🚀 Tech Stack
 
-- `index.html` - Main page with OpenAI Agent embed iframe
-- `style.css` - Floral-themed styling and responsive design
-- `app.js` - Example question handlers and iframe communication
-- `index-iframe.html` - Alternative standalone iframe version (backup)
+- **Frontend**: React 18 + Vite
+- **UI Library**: ChatKit React (@openai/chatkit-react)
+- **Backend**: Vercel Serverless Functions
+- **Deployment**: Vercel
+- **AI**: OpenAI ChatKit
+
+## 📁 Project Structure
+
+```
+diy-kits-assistant/
+├── api/
+│   └── chatkit/
+│       └── session.js          # Serverless function for session generation
+├── src/
+│   ├── App.jsx                 # Main React component with ChatKit
+│   ├── main.jsx                # React entry point
+│   └── index.css               # Global styles
+├── index.html                  # HTML entry point
+├── package.json                # Dependencies and scripts
+├── vite.config.js             # Vite configuration
+├── vercel.json                # Vercel deployment config
+└── .env.example               # Environment variables template
+```
+
+## 🛠️ Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone <your-repo-url>
+cd diy-kits-assistant
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure Environment Variables
+
+Create a `.env` file in the root directory:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and add your OpenAI API key:
+
+```
+OPENAI_API_KEY=sk-proj-your-actual-api-key-here
+```
+
+Get your API key from: https://platform.openai.com/api-keys
+
+### 4. Run Locally
+
+```bash
+npm run dev
+```
+
+The app will open at `http://localhost:5173`
+
+**Note**: The serverless function won't work locally unless you use Vercel CLI:
+
+```bash
+npm install -g vercel
+vercel dev
+```
+
+### 5. Deploy to Vercel
+
+#### Option A: Vercel CLI
+
+```bash
+vercel
+```
+
+#### Option B: Vercel Dashboard
+
+1. Go to [vercel.com](https://vercel.com)
+2. Import your GitHub repository
+3. Add environment variable: `OPENAI_API_KEY`
+4. Deploy!
+
+### 6. Set Environment Variable in Vercel
+
+After deploying, add your environment variable:
+
+1. Go to your project in Vercel Dashboard
+2. Settings → Environment Variables
+3. Add: `OPENAI_API_KEY` = `sk-proj-your-actual-api-key`
+4. Redeploy the project
 
 ## 🔧 Configuration
 
-The workflow is pre-configured in `app.js`:
+### Workflow ID
+
+The ChatKit workflow is configured in `/api/chatkit/session.js`:
 
 ```javascript
-const CONFIG = {
-    workflowId: 'wf_68f6ab81d6f88190a1dec39a2e92d45e0f1a0f65064df00b',
-    version: '1',
-    publicKey: 'domain_pk_68f6df7bf2888190bf6a77c5e40ae8bd090668efb04679ad'
-};
+workflow: { 
+  id: 'wf_68f6ab81d6f88190a1dec39a2e92d45e0f1a0f65064df00b' 
+}
 ```
 
-### 🔒 Security & Authentication
+### Custom Theme
 
-This app uses **OpenAI's official Agent Embed** with **domain whitelist authentication**:
+The floral theme is configured in `/src/App.jsx`:
 
-✅ **Official OpenAI embed** - most reliable integration method  
-✅ **Public key authentication** - safe to include in client-side code  
-✅ **Domain-based access control** - only your approved domains work  
-✅ **No private credentials exposed** - the public key is meant to be public  
-✅ **No CDN dependencies** - direct connection to OpenAI  
-✅ **Production-ready** - officially supported by OpenAI
+```javascript
+theme: {
+  primaryColor: '#f8b4d9',
+  accentColor: '#e91e63',
+  backgroundColor: '#fafafa',
+  textColor: '#333333',
+}
+```
 
-The iframe connects directly to `agent.openai.com` and authentication happens server-side, which verifies both the public key and that the request comes from an allowed domain.
+## 📝 How It Works
+
+1. **Frontend loads** → User opens the app
+2. **ChatKit initializes** → Calls `getClientSecret()` function
+3. **Backend request** → Frontend calls `/api/chatkit/session`
+4. **OpenAI API call** → Serverless function creates ChatKit session
+5. **Session returns** → Backend sends `client_secret` to frontend
+6. **Chat active** → ChatKit component renders with active session
+
+## 🌐 API Endpoints
+
+### POST `/api/chatkit/session`
+
+Creates a new ChatKit session and returns a client secret.
+
+**Request**:
+```json
+{
+  "deviceId": "optional-device-identifier"
+}
+```
+
+**Response**:
+```json
+{
+  "client_secret": "chatkit_secret_xyz..."
+}
+```
 
 ## 🎨 Customization
 
-### Colors
-Edit the CSS variables in `style.css`:
+### Change Colors
+
+Edit `src/index.css` to modify the color palette:
 
 ```css
 :root {
     --primary-pink: #f8b4d9;
     --soft-pink: #fce4ec;
+    --accent-pink: #e91e63;
     --primary-green: #81c784;
-    /* ... more colors */
+    --soft-green: #e8f5e9;
 }
 ```
 
-### Example Questions
-Update the buttons in `index.html`:
+### Modify Example Questions
 
-```html
-<button class="example-btn" data-question="Your question here">
-    Your question here
+Edit `src/App.jsx` to change the example questions:
+
+```jsx
+<button 
+  className="example-btn" 
+  onClick={() => handleExampleClick("Your custom question")}
+>
+  Your custom question
 </button>
 ```
 
 ## 🐛 Troubleshooting
 
-### "Failed to initialize chat" or messages not sending
-1. **Check domain whitelist**: Make sure your GitHub Pages domain is added in OpenAI Agent Builder
-   - Go to your workflow settings in OpenAI
-   - Verify the domain is exactly: `yourusername.github.io`
-   - No `https://`, no `www.`, no trailing slash
-2. **Check browser console** (F12) for detailed error messages
-3. **Verify workflow ID** is correct in `app.js`
+### ChatKit not loading?
 
-### ChatKit not loading
-- Check your internet connection (ChatKit loads via CDN)
-- Open browser console (F12) to see detailed error messages
-- Try refreshing the page
+1. Check browser console for errors
+2. Verify OpenAI API key is set in Vercel
+3. Ensure ChatKit script is loaded: check Network tab for `chatkit.js`
 
-### Works on localhost but not on GitHub Pages
-- Double-check you added the correct GitHub Pages domain to OpenAI
-- Make sure you're using the exact domain format: `username.github.io`
-- Changes to domain whitelist may take a few minutes to propagate
+### Session creation fails?
 
-### Domain authentication errors
-- Confirm the domain whitelist includes your GitHub Pages URL
-- For custom domains, add both the apex domain and www subdomain
-- Remove any test domains like `*` or `localhost` in production
+1. Check `/api/chatkit/session` is accessible
+2. Verify environment variable `OPENAI_API_KEY` is set
+3. Check Vercel function logs in dashboard
 
-## 📱 Browser Support
+### Local development not working?
 
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
+Use Vercel CLI for local testing:
+```bash
+vercel dev
+```
+
+## 📚 Resources
+
+- [ChatKit Documentation](https://platform.openai.com/docs/chatkit)
+- [Vercel Documentation](https://vercel.com/docs)
+- [React Documentation](https://react.dev)
+- [Vite Documentation](https://vitejs.dev)
 
 ## 📄 License
 
-This project is ready to use for your DIY Kits business!
+MIT License - feel free to use this for your own projects!
+
+## 🙋‍♀️ Support
+
+For issues or questions:
+1. Check the troubleshooting section above
+2. Review ChatKit documentation
+3. Check Vercel function logs
+4. Open an issue in this repository
 
 ---
 
-**Built with ❤️ and 🌸**
-
+Built with 💐 using OpenAI ChatKit
