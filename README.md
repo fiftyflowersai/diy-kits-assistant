@@ -2,7 +2,7 @@
 
 A beautiful, responsive web application that connects to OpenAI Agent Builder workflow using ChatKit to help customers explore floral arrangement kits.
 
-**🔒 Secure Authentication**: Uses OpenAI's domain whitelist - no API keys in the code!
+**🔒 Secure Authentication**: Uses OpenAI's official Agent Embed with domain whitelist - no API keys in the code!
 
 ## 🚀 Quick Start
 
@@ -54,18 +54,19 @@ git push origin main
 
 - **Beautiful UI**: Floral-themed design with soft pink and green colors
 - **Responsive**: Works perfectly on mobile, tablet, and desktop
-- **ChatKit Integration**: Connects to OpenAI Agent Builder workflow
+- **OpenAI Agent Embed**: Official iframe integration with OpenAI Agent Builder
 - **Example Questions**: Quick-start buttons for common queries
-- **Conversation Management**: Clear conversation history
-- **Smart Formatting**: Preserves line breaks, bullet points, and emphasis
-- **Loading States**: Visual feedback while agent is responding
-- **Error Handling**: Friendly error messages for better UX
+- **Conversation Management**: Clear conversation history with one click
+- **Built-in Chat Interface**: OpenAI's native chat UI embedded
+- **No External Dependencies**: Direct connection to OpenAI (no CDN issues)
+- **Production Ready**: Official embed method, fully supported
 
 ## 📋 Files
 
-- `index.html` - Main page structure
-- `style.css` - All styling and responsive design
-- `app.js` - ChatKit integration and application logic
+- `index.html` - Main page with OpenAI Agent embed iframe
+- `style.css` - Floral-themed styling and responsive design
+- `app.js` - Example question handlers and iframe communication
+- `index-iframe.html` - Alternative standalone iframe version (backup)
 
 ## 🔧 Configuration
 
@@ -81,14 +82,16 @@ const CONFIG = {
 
 ### 🔒 Security & Authentication
 
-This app uses **domain whitelist authentication** with a **public key** - the secure way to deploy client-side ChatKit apps:
+This app uses **OpenAI's official Agent Embed** with **domain whitelist authentication**:
 
+✅ **Official OpenAI embed** - most reliable integration method  
 ✅ **Public key authentication** - safe to include in client-side code  
 ✅ **Domain-based access control** - only your approved domains work  
 ✅ **No private credentials exposed** - the public key is meant to be public  
-✅ **Production-ready** - recommended by OpenAI for web apps
+✅ **No CDN dependencies** - direct connection to OpenAI  
+✅ **Production-ready** - officially supported by OpenAI
 
-The authentication happens server-side at OpenAI, which verifies both the public key and that the request comes from an allowed domain.
+The iframe connects directly to `agent.openai.com` and authentication happens server-side, which verifies both the public key and that the request comes from an allowed domain.
 
 ## 🎨 Customization
 
