@@ -30,18 +30,32 @@ const exampleQuestions = document.querySelectorAll('.example-btn');
 // ============================================
 function initializeChatKit() {
     try {
-        // Initialize ChatKit client with domain whitelist authentication
+        // Initialize ChatKit with official OpenAI configuration
         // Uses public key - authentication happens via domain whitelist
-        if (window.OpenAI && window.OpenAI.ChatKit) {
+        if (typeof window.ChatKit !== 'undefined') {
+            // Method 1: Using ChatKit.config (official method)
+            window.ChatKit.config = {
+                workflowId: CONFIG.workflowId,
+                version: CONFIG.version,
+                publicKey: CONFIG.publicKey,
+                container: '#chatContainer'
+            };
+            
+            console.log('ChatKit initialized successfully with domain whitelist authentication');
+            console.log('Config:', window.ChatKit.config);
+            return true;
+        } else if (window.OpenAI && window.OpenAI.ChatKit) {
+            // Method 2: Fallback to OpenAI.ChatKit if available
             chatClient = new window.OpenAI.ChatKit({
                 workflowId: CONFIG.workflowId,
                 version: CONFIG.version,
                 publicKey: CONFIG.publicKey
             });
             
-            console.log('ChatKit initialized successfully with domain whitelist authentication');
+            console.log('ChatKit initialized with OpenAI.ChatKit');
             return true;
         } else {
+            console.error('ChatKit SDK not found on window object');
             showError('ChatKit SDK not loaded. Please check your internet connection.');
             return false;
         }
